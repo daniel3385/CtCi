@@ -10,7 +10,6 @@
 #define OK 0
 #define NOK 1
 typedef int Result ;
-typedef int Table ;
 
 int table_of_ASCII[128] = {0};
 
