@@ -17,6 +17,10 @@ NodePtr makeNode(int n) {
     return node;
 }
 
+NodePtr deleteNode(NodePtr node) {
+    //TODO
+}
+
 void printLinkedList(NodePtr node) {
     printf("\n");
     while(node != NULL) {
@@ -51,6 +55,16 @@ NodePtr createLinkedList(int numbersToList[], int numberTotal) {
     }
     return head;
 }
+
+void removeDupsLinkedList(NodePtr head) {
+    // create nodeptr p1 and p2
+    // while p1 diff from NULL
+    //   while p2 diff from NULL
+    //     if p1 == p2
+    //     remove node(p2)
+    //   advance p1 to next node
+}
+
 
 int main() {
     int numbers[] = {0, 4 ,6};
