@@ -17,12 +17,12 @@ NodePtr makeNode(int n) {
     return node;
 }
 
-/*
 void deleteNode(NodePtr node) {
-    NodePtr nodeTmp = node;
-    node = node->next;
+    node->num = node->next->num;
+    NodePtr nodeTmp = node->next;
+    node->next = node->next->next;
     free(nodeTmp);
-}*/
+}
 
 void printLinkedList(NodePtr node) {
     printf("\n");
@@ -63,21 +63,20 @@ NodePtr createLinkedList(int numbersToList[], int numberTotal) {
  * if they match the same node, delete it
  */
 void removeDupsLinkedList(NodePtr head) {
+    if(head->next == NULL) {
+        // just 1 node
+        return;
+    }
     NodePtr p1 = head;
     NodePtr p2 = head->next;
 
-    while(p1 != NULL) {
-        while(p2 != NULL) {
-            if(p2->num == p1->num) {
-                p2->num = p2->next->num;
-                NodePtr nodeTmp = p2->next->next;
-                p2->next = p2->next->next;
-                free(nodeTmp);
-            } else
-                p2 = p2->next;
-        }
-        p1 = p1->next;
+    while(p2 != NULL) {
+        if(p2->num == p1->num) 
+            deleteNode(p2);
+        else
+            p2 = p2->next;
     }
+    removeDupsLinkedList(p1 = p1->next);
 }
 
 void doIt(int numbers[], int sizeVectorNumbers) {
