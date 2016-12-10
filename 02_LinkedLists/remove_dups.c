@@ -87,7 +87,6 @@ void doIt(int numbers[], int sizeVectorNumbers) {
     NodePtr list = createLinkedList(numbers, sizeVectorNumbers);
 
     // print list
-    printf("\n-------------------------------");
     printLinkedList(list);
 
     // remove dups from list'
