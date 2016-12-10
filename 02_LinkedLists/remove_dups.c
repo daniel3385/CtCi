@@ -10,7 +10,7 @@ typedef struct node {
     struct node *next;
 } Node, *NodePtr;
 
-NodePtr makeNode(int n) {
+NodePtr nodeNew(int n) {
     NodePtr node = malloc(sizeof(Node));
     node->num = n;
     node->next = NULL;
@@ -48,7 +48,7 @@ NodePtr createLinkedList(int numbersToList[], int numberTotal) {
     // while there is int to read
     while(index < numberTotal) {
         // create node
-        node = makeNode(numbersToList[index]);
+        node = nodeNew(numbersToList[index]);
         if(head == NULL) {
             // is the first node
             head = node;
