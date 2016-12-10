@@ -27,10 +27,13 @@ void deleteNode(NodePtr node) {
 void printLinkedList(NodePtr node) {
     printf("\n");
     while(node != NULL) {
-        printf("(%d)->", node->num);
+        if(node->next != NULL)
+            printf("(%d)->", node->num);
+        else
+            printf("(%d)", node->num);
         node = node->next;
     }
-    printf("(END)\n");
+    printf("\n");
 }
 
 // Node create linke list
@@ -84,6 +87,7 @@ void doIt(int numbers[], int sizeVectorNumbers) {
     NodePtr list = createLinkedList(numbers, sizeVectorNumbers);
 
     // print list
+    printf("\n-------------------------------");
     printLinkedList(list);
 
     // remove dups from list'
@@ -91,6 +95,7 @@ void doIt(int numbers[], int sizeVectorNumbers) {
 
     // print list again
     printLinkedList(list);
+    printf("-------------------------------\n");
 }
 
 int main() {
