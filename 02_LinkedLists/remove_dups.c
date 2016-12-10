@@ -17,9 +17,12 @@ NodePtr makeNode(int n) {
     return node;
 }
 
-NodePtr deleteNode(NodePtr node) {
-    //TODO
-}
+/*
+void deleteNode(NodePtr node) {
+    NodePtr nodeTmp = node;
+    node = node->next;
+    free(nodeTmp);
+}*/
 
 void printLinkedList(NodePtr node) {
     printf("\n");
@@ -56,19 +59,28 @@ NodePtr createLinkedList(int numbersToList[], int numberTotal) {
     return head;
 }
 
+/* p2 will run the list faster than p1,
+ * if they match the same node, delete it
+ */
 void removeDupsLinkedList(NodePtr head) {
-    // create nodeptr p1 and p2
-    // while p1 diff from NULL
-    //   while p2 diff from NULL
-    //     if p1 == p2
-    //     remove node(p2)
-    //   advance p1 to next node
+    NodePtr p1 = head;
+    NodePtr p2 = head->next;
+
+    while(p1 != NULL) {
+        while(p2 != NULL) {
+            if(p2->num == p1->num) {
+                p2->num = p2->next->num;
+                NodePtr nodeTmp = p2->next->next;
+                p2->next = p2->next->next;
+                free(nodeTmp);
+            } else
+                p2 = p2->next;
+        }
+        p1 = p1->next;
+    }
 }
 
-
-int main() {
-    int numbers[] = {0, 4 ,6};
-    int sizeVectorNumbers = sizeof(numbers)/sizeof(int);
+void doIt(int numbers[], int sizeVectorNumbers) {
     // create linked list from vector numbers
     NodePtr list = createLinkedList(numbers, sizeVectorNumbers);
 
@@ -76,9 +88,25 @@ int main() {
     printLinkedList(list);
 
     // remove dups from list'
-    // TODO
+    removeDupsLinkedList(list);
 
     // print list again
     printLinkedList(list);
+}
+
+int main() {
+
+    int numbers[] = {0, 0, 1, 7, 4 ,6};
+    int sizeVectorNumbers = sizeof(numbers)/sizeof(int);
+    doIt(numbers, sizeVectorNumbers);
+
+    int numbers2[] = {0, 4, 4, 4, 6, 8, 9};
+    int sizeVectorNumbers2 = sizeof(numbers2)/sizeof(int);
+    doIt(numbers2, sizeVectorNumbers2);
+
+    int numbers3[] = {0, 4, 10, 8, 6, 8, 6, 8, 0, 10, 12 };
+    int sizeVectorNumbers3 = sizeof(numbers3)/sizeof(int);
+    doIt(numbers3, sizeVectorNumbers3);
+
     return 0;
 }
