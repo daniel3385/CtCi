@@ -72,38 +72,40 @@ NodePtr findIntersection(NodePtr listA, NodePtr listB) {
         else
             listB = listB->next;
     }
-    return findIntersection(listA->next, headListB)
+    return findIntersection(listA->next, headListB);
 }
 
-void doIt(int numbers[], int sizeVectorNumbers, int kth) {
+void checkResult(NodePtr result) {
+    if (NULL != result) 
+        printf("Intersected [%d]\n", result->num);
+    else
+        printf("Not intersected. \n");
+    return;
+}
+
+void doIt(int numbers[], int sizeVectorNumbers) {
     // create linked list from vector numbers
-    NodePtr list = createLinkedList(numbers, sizeVectorNumbers);
+    NodePtr listA = createLinkedList(numbers, sizeVectorNumbers);
+    printLinkedList(listA);
 
-    // print list
-    printLinkedList(list);
+    NodePtr result = findIntersection(listA, listA->next->next);
+    checkResult(result);
+    
 
-    printf("\nFrom [%d] element:", kth);
-    NodePtr nodeKth = NULL;
-    //return the Kth of a linked list
-    nodeKth = returnKthToLast(list, kth);
+    NodePtr listB = listA->next->next->next->next;
+    result = findIntersection(listA, listB);
+    checkResult(result);
 
-    // print list again
-    printLinkedList(nodeKth);
+    listB = createLinkedList(numbers, sizeVectorNumbers);
+    result = findIntersection(listA, listB);
+    checkResult(result);
 }
 
 int main() {
 
-    int numbers[] = {0, 0, 1, 7, 4 ,6};
+    int numbers[] = { 0, 0, 1, 7, 4, 6 };
     int sizeVectorNumbers = sizeof(numbers)/sizeof(int);
-    doIt(numbers, sizeVectorNumbers, 4);
-
-    int numbers2[] = {0, 4, 4, 4, 6, 8, 9};
-    int sizeVectorNumbers2 = sizeof(numbers2)/sizeof(int);
-    doIt(numbers2, sizeVectorNumbers2, 3);
-
-    int numbers3[] = {0, 4, 10, 8, 6, 8, 6, 8, 0, 10, 12 };
-    int sizeVectorNumbers3 = sizeof(numbers3)/sizeof(int);
-    doIt(numbers3, sizeVectorNumbers3, 5);
+    doIt(numbers, sizeVectorNumbers);
 
     return 0;
 }
